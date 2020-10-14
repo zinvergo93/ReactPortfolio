@@ -1,4 +1,4 @@
-# React/Redux/Router Starter Project
+# Zachary Invergo Portfolio with React
 
 
 >> The purpose of the project is to compile any and all notable creations made through methods learned
