@@ -6,21 +6,26 @@ export default class PortfolioContainer extends Component {
     // State & Lifecycle hooks- used by class component
     constructor(){
         super();
-        console.log("Portfolio Container has rendered")
+        this.state = {
+            pageTitle: "Welcome to my portfolio!",
+            data: [
+                {title: "Quip"}, 
+                {title: "Eventbrite"}, 
+                {title: "Ministry Safe"}, 
+                {title: "SwingAway"}
+            ]
+        };
     }
 
     portfolioItems() {
-        const data = ["Quip", "Eventbrite", "Ministry Safe", "Swingaway"];
-
-        return data.map(item => {
-            return <PortfolioItem/>;
+        return this.state.data.map(item => {
+            return <PortfolioItem title={item.title} url={"google.com"}/>;
         })
     }
     render() {
         return (
             <div>
-                <h2> Portfolio items go here... </h2>
-
+                <h2> {this.state.pageTitle} </h2>
                 {this.portfolioItems()}
             </div>
         );
