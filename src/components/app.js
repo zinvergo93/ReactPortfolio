@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from "moment";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,32 +11,29 @@ import about from "./pages/about";
 import contact from './pages/contact';
 import blog from './pages/blog';
 import PortfolioDetail from './portfolio/portfolio-detail';
+import Auth from "./pages/auth"
 import NoMatch from './pages/no-match';
 
 
 export default class App extends Component {
   render() {
     return (
-      <div className='app'>
+      <div className='container'>
 
       <Router>
-
-        <h1>Zachary Invergo Portfolio</h1>
-        <div>
-          {moment().format('MMMM Do YYYY, h:mm:ss a')}
-        </div>
-        <div>
-          <NavigationContainer />
-
-            <Switch>
-              <Route exact path = "/" component = {home} />
-              <Route path = "/about-me" component = {about} />
-              <Route path = "/contact" component = {contact} />
-              <Route path = "/blog" component = {blog} />
-              <Route exact path = "/portfolio/:slug" component = {PortfolioDetail} />
-              <Route component = {NoMatch} />
-            </Switch>
-        </div>
+      <div>
+        
+        <NavigationContainer />
+         <Switch>
+            <Route exact path = "/" component = {home} />
+            <Route exact path = "/auth" component = {Auth} />
+            <Route path = "/about-me" component = {about} />
+            <Route path = "/contact" component = {contact} />
+            <Route path = "/blog" component = {blog} />
+            <Route exact path = "/portfolio/:slug" component = {PortfolioDetail} />
+            <Route component = {NoMatch} />
+          </Switch>
+      </div>
       </Router>
 
       </div>

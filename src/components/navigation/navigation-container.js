@@ -36,9 +36,13 @@ export default class NavigationComponent extends Component {
                     </div>
 
                     <div className = "nav-link-wrapper">
-                        {false ? <NavLink to = "/add-blog"> Add Blog </NavLink> : null}
+                        {false ? <NavLink to = "/add-blog"> Blog Manager </NavLink> : null}
                     </div>
-                    
+                   
+                    <div className = "nav-link-wrapper">
+                        {false ? <NavLink to = "/add-portfolio"> Portfolio Manager </NavLink> : null}
+                    </div>
+
                 </div>
 
                 <div className="right-side"> ZAC INVERGO</div>
