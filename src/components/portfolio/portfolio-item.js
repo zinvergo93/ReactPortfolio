@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import logoImage from '../../../static/assets/images/ds_circle_logo.png';
 
 export default class PortfolioItem extends Component {
     constructor(props) {
@@ -34,13 +35,16 @@ export default class PortfolioItem extends Component {
             
             <div className = "img-text-wrapper">
 
-                <div className = "logo-wrapper">
-                    <img src = "./ds_circle_logo.png" />
-                </div>
+                <div 
+                    className = "logo-wrapper"
+                    style = {{backgroundImage: `url(${logoImage})`}}                    
+                />
+                    
+                
                 <div className = "subtitle"> {description}</div>
             </div>
             
-            // <Link to ={`/portfolio/${id}`}>See more</Link>
+            <Link to ={`/portfolio/${id}`}>See more</Link>
         </div>
         );
     }
