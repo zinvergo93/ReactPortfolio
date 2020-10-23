@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default function contact(params) {
+export default function Contact() {
     return (
         <div>
             <h2>Contact page</h2>
