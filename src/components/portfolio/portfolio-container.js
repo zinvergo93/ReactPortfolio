@@ -5,7 +5,7 @@ import PortfolioItem from "./portfolio-item";
 
 export default class PortfolioContainer extends Component {
     // State & Lifecycle hooks- used by class component
-    constructor(){
+constructor(){ 
         super();
          
         this.state = {
