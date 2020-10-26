@@ -31,7 +31,7 @@ class PortfolioManager extends Component {
         axios
         .get("https://zinvergocode.devcamp.space/portfolio/portfolio_items", {withCredentials: true})
         .then(response => {
-          console.log("response data", response);
+        //   console.log("response data", response);
           this.setState({
               portfolioItems: response.data.portfolio_items
           })
@@ -44,6 +44,7 @@ class PortfolioManager extends Component {
     mapPortfolioItems() {
         return this.state.portfolioItems.map(item => {
             console.log("item data", item)
+
         });
     }
 
