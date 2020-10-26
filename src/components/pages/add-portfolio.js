@@ -29,7 +29,7 @@ class PortfolioManager extends Component {
 
     grabPortfolioItems() {
         axios
-        .get("https://zinvergocode.devcamp.space/portfolio/portfolio_items?", {withCredentials: true})
+        .get("https://zinvergocode.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc", {withCredentials: true})
         .then(response => {
         //   console.log("response data", response);
           this.setState({
