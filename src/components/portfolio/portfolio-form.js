@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class PortfolioForm extends Component {
     constructor(props) {
@@ -7,7 +8,7 @@ class PortfolioForm extends Component {
             name: "",
             description: "",
             url: "",
-            category: "",
+            category: "eCommerce",
             position: "",
             thumb_image: "",
             banner_image: "",
@@ -29,8 +30,6 @@ class PortfolioForm extends Component {
         // formData.append("portfolio_item[banner_image]", this.state.banner_image);
         // formData.append("portfolio_item[logo]", this.state.logo);
 
-        debugger
-
         return formData;
     }
 
@@ -41,7 +40,16 @@ class PortfolioForm extends Component {
     }
 
     handleSubmit(event) {
-        this.buildForm();
+        axios.post(
+            "https://zinvergocode.devcamp.space/portfolio/portfolio_items", 
+            this.buildForm(), 
+            { withCredentials: true}
+        ).then(response => {
+            this.props.handleSuccessfulFormSubmission(response.data.portfolio_item)
+        }).catch(error => {
+            console.log("portfolio form handleSubmit error", error)
+        })
+
         event.preventDefault();
     }
     render() { 
@@ -72,13 +80,16 @@ class PortfolioForm extends Component {
                             value = {this.state.position}
                             onChange={this.handleChange}
                         />
-                        <input
-                            type="select"
+                        <select
                             name="category"
-                            placeholder = "Category"
                             value = {this.state.category}
                             onChange={this.handleChange}
-                        />
+                        >
+                            
+                            <option value = "eCommerce">eCommerce</option>
+                            <option value = "Scheduling">Scheduling</option>
+                            <option value = "Enterprise">Enterprise</option>
+                        </select>
                         {/* <input
                             type="text"
                             name="thumb_image"
@@ -102,8 +113,8 @@ class PortfolioForm extends Component {
                         /> */}
                     </div>
                 <div>
-                    <input
-                        type="textArea"
+                    <textarea
+                        type="text"
                         name="description"
                         placeholder = "Description"
                         value = {this.state.description}

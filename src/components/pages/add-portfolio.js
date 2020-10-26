@@ -17,10 +17,10 @@ class PortfolioManager extends Component {
          this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
     }
 
-    handleSuccessfulFormSubmission(porfolioItem) {
-        // TODO
-        // update the portfolioItems state
-        // and add the portfolioItem to the list
+    handleSuccessfulFormSubmission(portfolioItem) {
+        this.setState({
+            portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
+        })
     }
 
     handleFormSubmissionError(error) {
@@ -29,7 +29,7 @@ class PortfolioManager extends Component {
 
     grabPortfolioItems() {
         axios
-        .get("https://zinvergocode.devcamp.space/portfolio/portfolio_items", {withCredentials: true})
+        .get("https://zinvergocode.devcamp.space/portfolio/portfolio_items?", {withCredentials: true})
         .then(response => {
         //   console.log("response data", response);
           this.setState({
@@ -37,7 +37,7 @@ class PortfolioManager extends Component {
           })
         })
         .catch(error => {
-          console.log(error);
+          console.log("error in getPortfolio Items", error);
         });
       }
 
