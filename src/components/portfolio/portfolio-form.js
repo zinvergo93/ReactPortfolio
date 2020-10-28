@@ -16,7 +16,10 @@ class PortfolioForm extends Component {
             position: "",
             thumb_image: "",
             banner_image: "",
-            logo: ""
+            logo: "",
+            editMode: false,
+            apiUrl: "https://zinvergocode.devcamp.space/portfolio/portfolio_items",
+            apiAction: "post",
          };
 
          this.handleChange = this.handleChange.bind(this);
@@ -53,12 +56,15 @@ class PortfolioForm extends Component {
                 id: id,
                 name: name || "",
                 description: description || "",
-                url: url || "",
                 category: category || "eCommerce",
                 position: position || "",
-                thumb_image: "",
-                banner_image:"",
-                logo: ""
+                url: url || "",
+                editMode: true,
+                apiUrl: `https://zinvergocode.devcamp.space/portfolio/portfolio_items/${id}`,
+                apiAction: "patch",
+                thumb_image: thumb_image_url || "",
+                banner_image: banner_image_url || "",
+                logo: logo_url || "",
             })
         }
     }
@@ -124,12 +130,18 @@ class PortfolioForm extends Component {
     }
 
     handleSubmit(event) {
-        axios.post(
-            "https://zinvergocode.devcamp.space/portfolio/portfolio_items", 
-            this.buildForm(), 
-            { withCredentials: true}
-        ).then(response => {
-            this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
+        axios({
+            method: this.state.apiAction,
+            url: this.state.apiUrl,
+            data: this.buildForm(),
+            withCredentials: true
+        })
+            .then(response => {
+                if (this.state.editMode) {
+                    this.props.handleEditFormSubmission();
+                } else {
+                this.props.handleNewFormSubmission(response.data.portfolio_item);
+                }
 
             this.setState({ 
                 name: "",
@@ -139,7 +151,11 @@ class PortfolioForm extends Component {
                 position: "",
                 thumb_image: "",
                 banner_image: "",
-                logo: ""
+                logo: "",
+                editMode: false,
+                apiUrl: "https://zinvergocode.devcamp.space/portfolio/portfolio_items",
+                apiAction: "post",
+                
              });
 
             [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
@@ -198,14 +214,18 @@ class PortfolioForm extends Component {
                 />
             </div>
             <div className = "image-uploaders">
-                <DropzoneComponent
-                    ref= {this.thumbRef}
-                    config = {this.componentConfig()}
-                    djsConfig = {this.djsConfig()}
-                    eventHandlers={this.handleThumbDrop()}
-                >
-                <div className= "dz-message">Add Thumbnail</div>
-                </DropzoneComponent>
+                {this.state.thumb_image && this.state.editMode ?
+                    <img src={this.state.thumb_image}/>
+                    :
+                    <DropzoneComponent
+                        ref= {this.thumbRef}
+                        config = {this.componentConfig()}
+                        djsConfig = {this.djsConfig()}
+                        eventHandlers={this.handleThumbDrop()}
+                    >
+                        <div className= "dz-message">Add Thumbnail</div>
+                    </DropzoneComponent>
+                }
                 <DropzoneComponent
                     ref= {this.bannerRef}
                     config = {this.componentConfig()}
