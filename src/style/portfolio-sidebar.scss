@@ -6,8 +6,27 @@
         .portfolio-img-thumb img{
             width: 100%;
         }
-        .title {
-            color: $teal;
+
+        .text-content{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .title {
+                color: $offwhite;
+                font-size: 1.5em;
+            }
+
+            .delete-icon {
+                cursor: pointer;
+                color: $offwhite;
+                font-size: 1.3em;
+                transition: 0.5s ease-in-out;
+
+                &:hover {
+                    color: $warning;
+                }
+            }
         }
     }
 }

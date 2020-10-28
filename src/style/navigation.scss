@@ -34,4 +34,18 @@
             color: black
         }
     }
+    .right-side{
+        
+
+        .sign-out{
+            margin-left: 15px;
+            cursor: pointer;
+            color: $offwhite;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+                color: $dark-teal
+            }
+        }
+    }
 }
