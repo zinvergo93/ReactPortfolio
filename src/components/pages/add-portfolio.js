@@ -8,16 +8,23 @@ class PortfolioManager extends Component {
     constructor() {
         super();
         this.state = { 
-            portfolioItems: []
+            portfolioItems: [],
+            portfolioToEdit: {}
          }
          
          this.grabPortfolioItems = this.grabPortfolioItems.bind(this);
          this.mapPortfolioItems = this.mapPortfolioItems.bind(this);
-         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
-         this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this)
-         this.handleDeleteClick = this.handleDeleteClick.bind(this)
+         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
+         this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
+         this.handleDeleteClick = this.handleDeleteClick.bind(this);
+         this.handleEditClick = this.handleEditClick.bind(this);
     }
 
+    handleEditClick(portfolioItem) {
+        this.setState({
+            portfolioToEdit: portfolioItem
+        })
+    }
     handleDeleteClick(portfolioItem) {
         // console.log("handleDeleteClick", portfolioItem);
         axios.delete(
@@ -83,6 +90,7 @@ class PortfolioManager extends Component {
                 <PortfolioSidebarList 
                 handleDeleteClick = {this.handleDeleteClick}
                 data = {this.state.portfolioItems}
+                handleEditClick= {this.handleEditClick}
                 />
             </div>
             
