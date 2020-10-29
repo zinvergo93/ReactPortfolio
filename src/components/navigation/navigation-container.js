@@ -24,7 +24,7 @@ const NavigationComponent = (props) => {
         return (
             <div className = "nav-link-wrapper">
                 <NavLink exact to = "/add-blog" activeClassName = "nav-link-active">
-                    Blog Manager
+                    New Blog
                 </NavLink>  
             </div>
         )
