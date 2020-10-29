@@ -40,11 +40,11 @@
         .sign-out{
             margin-left: 15px;
             cursor: pointer;
-            color: $offwhite;
+            color: #8a8a8a;
             transition: 0.3s ease-in-out;
 
             &:hover {
-                color: $dark-teal
+                color: $charcoal
             }
         }
     }
