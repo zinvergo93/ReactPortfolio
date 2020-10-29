@@ -19,6 +19,17 @@
                 object-fit: cover;
                 border-radius: 5px;
             }
+
+            .image-removal-link {
+                display: flex;
+                justify-content: center;
+                a {
+                    font-size: 0.8em;
+                    font-weight: 900;
+                    color: $warning;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

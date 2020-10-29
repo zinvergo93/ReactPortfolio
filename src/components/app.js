@@ -9,9 +9,9 @@ import Home from "./pages/home";
 import About from "./pages/about";
 import Contact from './pages/contact';
 import Blog from './pages/blog';
-import AddPortfolio from './pages/add-portfolio';
+import AddPortfolio from './pages/portfolio-manager';
 import AddBlog from './pages/add-blog';
-import PortfolioManager from './pages/add-portfolio';
+import PortfolioManager from './pages/portfolio-manager';
 import PortfolioDetail from './portfolio/portfolio-detail';
 import Auth from "./pages/auth"
 import NoMatch from './pages/no-match';

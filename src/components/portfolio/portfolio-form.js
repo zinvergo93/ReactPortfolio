@@ -25,10 +25,11 @@ class PortfolioForm extends Component {
          this.handleChange = this.handleChange.bind(this);
          this.handleSubmit = this.handleSubmit.bind(this);
          this.componentConfig = this.componentConfig.bind(this);
-         this.djsConfig = this.djsConfig.bind(this)
+         this.djsConfig = this.djsConfig.bind(this);
          this.handleThumbDrop = this.handleThumbDrop.bind(this);
          this.handleBannerDrop = this.handleBannerDrop.bind(this);
          this.handleLogoDrop = this.handleLogoDrop.bind(this);
+         this.deleteImage = this.deleteImage.bind(this);
 
          this.thumbRef = React.createRef();
          this.bannerRef = React.createRef();
@@ -36,6 +37,18 @@ class PortfolioForm extends Component {
          
     }
 
+    deleteImage(imageType) {
+    axios.delete(`https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state
+    .id}?image_type=${imageType}`,
+        { withCredentials: true}
+    ).then(response => {
+        this.setState({
+            [`${imageType}_url`]: ""
+        })
+    }).catch(error => {
+        console.log("deleteImage error", error)
+    })
+    }
     componentDidUpdate() {
         if (Object.keys(this.props.portfolioToEdit).length > 0) {
             const {
@@ -62,9 +75,9 @@ class PortfolioForm extends Component {
                 editMode: true,
                 apiUrl: `https://zinvergocode.devcamp.space/portfolio/portfolio_items/${id}`,
                 apiAction: "patch",
-                thumb_image: thumb_image_url || "",
-                banner_image: banner_image_url || "",
-                logo: logo_url || "",
+                thumb_image_url: thumb_image_url || "",
+                banner_image_url: banner_image_url || "",
+                logo_url: logo_url || "",
             })
         }
     }
@@ -214,9 +227,13 @@ class PortfolioForm extends Component {
                 />
             </div>
             <div className = "image-uploaders">
-                {this.state.thumb_image && this.state.editMode ? (
+                {this.state.thumb_image_url && this.state.editMode ? (
                     <div className="portfolio-manager-image-wrapper">
-                    <img src={this.state.thumb_image}/>
+                        <img src={this.state.thumb_image_url}/>
+
+                        <div className="image-removal-link">
+                            <a onClick={() => this.deleteImage("thumb_image")}>Remove file</a>
+                        </div>
                     </div>
                    ) : (
                     <DropzoneComponent
@@ -228,9 +245,13 @@ class PortfolioForm extends Component {
                         <div className= "dz-message">Add Thumbnail</div>
                     </DropzoneComponent>
                    )}
-                {this.state.banner_image && this.state.editMode ? (
+                {this.state.banner_image_url && this.state.editMode ? (
                     <div className="portfolio-manager-image-wrapper">
-                    <img src={this.state.banner_image}/>
+                        <img src={this.state.banner_image_url}/>
+                        
+                        <div className="image-removal-link">
+                            <a onClick={() => this.deleteImage("banner_image")}>Remove file</a>
+                        </div>
                     </div>
                    ) : (
                 <DropzoneComponent
@@ -243,9 +264,13 @@ class PortfolioForm extends Component {
                 </DropzoneComponent>
                     )}
                 
-                {this.state.logo && this.state.editMode ? (
+                {this.state.logo_url && this.state.editMode ? (
                     <div className="portfolio-manager-image-wrapper">
-                    <img src={this.state.logo}/>
+                        <img src={this.state.logo_url}/>
+                        
+                        <div className="image-removal-link">
+                            <a onClick={() => this.deleteImage("logo")}>Remove file</a>
+                        </div>
                     </div>
                    ) : (
                 <DropzoneComponent
