@@ -41,7 +41,6 @@ class BlogForm extends Component {
         })
 
 
-        this.props.handleSuccessfulFormSubmission(this.state);
         event.preventDefault();
     }
 
