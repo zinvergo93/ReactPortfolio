@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-
 import BlogItem from "../blog/blog-item";
 import BlogModal from "../modals/blog-modal";
 
-export default class Blog extends Component {
-  constructor(props) {
-    super(props);
+class Blog extends Component {
+  constructor() {
+    super();
+
     this.state = {
       blogItems: [],
       totalCount: 0,
@@ -39,11 +39,13 @@ export default class Blog extends Component {
       blogModalIsOpen: false,
     });
   }
+
   handleNewBlogClick() {
     this.setState({
       blogModalIsOpen: true,
     });
   }
+
   onScroll() {
     if (
       this.state.isLoading ||
@@ -56,7 +58,6 @@ export default class Blog extends Component {
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
     ) {
-      console.log("get more posts");
       this.getBlogItems();
     }
   }
@@ -74,7 +75,7 @@ export default class Blog extends Component {
         }
       )
       .then((response) => {
-        console.log("getting", response.data);
+        console.log("gettting", response.data);
         this.setState({
           blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
           totalCount: response.data.meta.total_records,
@@ -93,6 +94,7 @@ export default class Blog extends Component {
   componentWillUnmount() {
     window.removeEventListener("scroll", this.onScroll, false);
   }
+
   render() {
     const blogRecords = this.state.blogItems.map((blogItem) => {
       return <BlogItem key={blogItem.id} blogItem={blogItem} />;
@@ -101,12 +103,13 @@ export default class Blog extends Component {
     return (
       <div className="blog-container">
         <BlogModal
-          handleModalClose={this.handleModalClose}
-          modalIsOpen={this.state.blogModalIsOpen}
           handleSuccessfulNewBlogSubmission={
             this.handleSuccessfulNewBlogSubmission
           }
+          handleModalClose={this.handleModalClose}
+          modalIsOpen={this.state.blogModalIsOpen}
         />
+
         {this.props.loggedInStatus === "LOGGED_IN" ? (
           <div className="new-blog-link">
             <a onClick={this.handleNewBlogClick}>
@@ -114,6 +117,7 @@ export default class Blog extends Component {
             </a>
           </div>
         ) : null}
+
         <div className="content-container">{blogRecords}</div>
 
         {this.state.isLoading ? (
@@ -125,3 +129,5 @@ export default class Blog extends Component {
     );
   }
 }
+
+export default Blog;

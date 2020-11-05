@@ -1,44 +1,50 @@
-import React, { Component } from 'react';
-import ReactModal from 'react-modal';
-import BlogForm from '../blog/blog-form';
+import React, { Component } from "react";
+import ReactModal from "react-modal";
 
-ReactModal.setAppElement(".app-wrapper")
+import BlogForm from "../blog/blog-form";
 
-class BlogModal extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
+ReactModal.setAppElement(".app-wrapper");
 
-        this.customStyles = {
-            content: {
-                top: "50%",
-                left: "50%",
-                right: "auto",
-                marginRight: "-50%",
-                transform: "translate(-50%, -50%)",
-                width: "800px"
-            },
-            overlay: {
-                backgroundColor: "rgba(1, 1, 1, 0.65)"
-            }
-        }
+export default class BlogModal extends Component {
+  constructor(props) {
+    super(props);
 
-        this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this)
-    }
+    this.customStyles = {
+      content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%",
+        width: "800px",
+      },
+      overlay: {
+        backgroundColor: "rgba(1, 1, 1, 0.75)",
+      },
+    };
 
-    handleSuccessfulFormSubmission(blog) {
-        this.props.handleSuccessfulNewBlogSubmission(blog);
-    }
-    render() { 
-        return ( 
-            <ReactModal style={this.customStyles}
-                onRequestClose={() => {
-                this.props.handleModalClose();
-            }} isOpen={this.props.modalIsOpen}>
-                <BlogForm handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission} />
-            </ReactModal>
-         );
-    }
+    this.handleSuccessfullFormSubmission = this.handleSuccessfullFormSubmission.bind(
+      this
+    );
+  }
+
+  handleSuccessfullFormSubmission(blog) {
+    this.props.handleSuccessfulNewBlogSubmission(blog);
+  }
+
+  render() {
+    return (
+      <ReactModal
+        style={this.customStyles}
+        onRequestClose={() => {
+          this.props.handleModalClose();
+        }}
+        isOpen={this.props.modalIsOpen}
+      >
+        <BlogForm
+          handleSuccessfullFormSubmission={this.handleSuccessfullFormSubmission}
+        />
+      </ReactModal>
+    );
+  }
 }
- 
-export default BlogModal;
