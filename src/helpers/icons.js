@@ -5,6 +5,7 @@ import {
   faEdit,
   faSpinner,
   faPlusSquare,
+  faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Icons = () => {
